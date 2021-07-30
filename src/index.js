@@ -17,11 +17,10 @@ function renderImages(images) {
     // console.log(images)
 const imageContainer = document.getElementById('dog-image-container')
 images.forEach(image => {
-    console.log(image)
+    // console.log(image)
     const img = document.createElement('img')
     img.src = image
     imageContainer.appendChild(img)
-    // console.log(image)
 })}
 // on page load
 // fetch the images using the the url below
@@ -30,17 +29,25 @@ images.forEach(image => {
 // const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
 
 function fetchDogs() {
-    return fetch(breedUrl)
+    return fetch("https://dog.ceo/api/breeds/list/all")
     .then(resp => resp.json())
     .then(json => {
+        // console.log(json)
         // renderBreeds(json)
     })
 }
 
+function renderBreeds(breeds)
+const list = document.getElementById('dog-breeds')
+breeds.forEach(breed => {
+    console.log(breed)
+    const listItem = document.createElement('li')
+
+})
 // on page load
 // fetch all the dog breeds using the url below
 // add the breeds to the page in an <ul> 
-const breedUrl = 'https://dog.ceo/api/breeds/list/all'
+
 
 // once all of the breeds are rendered in the <ul>
 //  add javascript so that the font color of a particular <li> changes on click.
