@@ -1,7 +1,8 @@
-console.log('%c HI', 'color: firebrick')
+// console.log('%c HI', 'color: firebrick')
 
 document.addEventListener("DOMContentLoaded", function() {
     fetchImages()
+    fetchBreeds()
 })
 
 function fetchImages() {
@@ -15,35 +16,36 @@ function fetchImages() {
 
 function renderImages(images) {
     // console.log(images)
-const imageContainer = document.getElementById('dog-image-container')
-images.forEach(image => {
+    const imageContainer = document.getElementById("dog-image-container")
+    images.forEach(image => {
     // console.log(image)
     const img = document.createElement('img')
     img.src = image
     imageContainer.appendChild(img)
 })}
-// on page load
-// fetch the images using the the url below
-// parse the responses as JSON
-// add image elements to the DOM for each image in the array
-// const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
 
-function fetchDogs() {
+function fetchBreeds() {
     return fetch("https://dog.ceo/api/breeds/list/all")
     .then(resp => resp.json())
     .then(json => {
-        // console.log(json)
-        // renderBreeds(json)
+        console.log(json)
+        const breeds = Object.keys(json.message)
+        renderBreeds(breeds)
     })
 }
 
-function renderBreeds(breeds)
-const list = document.getElementById('dog-breeds')
-breeds.forEach(breed => {
-    console.log(breed)
-    const listItem = document.createElement('li')
-
+function renderBreeds(breeds) {
+    const ul = document.getElementById("dog-breeds")
+    breeds.forEach(breed => {
+    // console.log(breed)
+    const li = document.createElement('li')
+    li.innerText = breed
+    ul.appendChild(li)
+    li.addEventListener("click", function(event) {
+        event.target.style.color = "blue"
+    })
 })
+}
 // on page load
 // fetch all the dog breeds using the url below
 // add the breeds to the page in an <ul> 
