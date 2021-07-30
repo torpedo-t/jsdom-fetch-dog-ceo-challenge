@@ -1,27 +1,33 @@
 console.log('%c HI', 'color: firebrick')
 
 document.addEventListener("DOMContentLoaded", function() {
-
+    fetchImages()
 })
 
 function fetchImages() {
-    return fetch(imgUrl)
+    return fetch("https://dog.ceo/api/breeds/image/random/4")
     .then(resp => resp.json())
     .then(json => {
-        // renderImages(json)
+        // console.log(json)
+        renderImages(json.message)
     })
 }
 
-function renderImages(images)
-const imageContainer = document.querySelectory('#dog-image-container')
+function renderImages(images) {
+    // console.log(images)
+const imageContainer = document.getElementById('dog-image-container')
 images.forEach(image => {
-    const 
-})
+    console.log(image)
+    const img = document.createElement('img')
+    img.src = image
+    imageContainer.appendChild(img)
+    // console.log(image)
+})}
 // on page load
 // fetch the images using the the url below
 // parse the responses as JSON
 // add image elements to the DOM for each image in the array
-const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
+// const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
 
 function fetchDogs() {
     return fetch(breedUrl)
