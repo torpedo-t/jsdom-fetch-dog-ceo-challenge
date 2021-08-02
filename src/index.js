@@ -58,21 +58,19 @@ function renderFilteredBreeds() {
     let dropDown = document.getElementById("breed-dropdown")
     console.log(dropDown)
     dropDown.addEventListener("change", function(event) {
-        filterBreeds(event.target.value)
+        fetchFilteredBreeds(event.target.value)
     })
 }
 
 // associate a constant with the array of dog breeds
-function filterBreeds(letter) { 
+function fetchFilteredBreeds(letter) { 
     return fetch('https://dog.ceo/api/breeds/list/all')
     .then(resp => resp.json())
     .then(json => {
         const breeds = Object.keys(json.message)
     const breedStartsWith = breeds.filter(breed => breed.startswith(letter))
-    updateBreeds(breedStartsWith)
+    renderBreeds(breedStartsWith)
 })
 }
-
-// renderFilteredBreeds()
 
 // call on renderFilteredBreeds()
