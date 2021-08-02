@@ -2,6 +2,7 @@ console.log('%c HI', 'color: firebrick')
 const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
 const breedUrl = 'https://dog.ceo/api/breeds/list/all'
 const breedDropDown = document.getElementById("breed-dropdown")
+let breeds = []
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -61,9 +62,7 @@ function renderFilteredBreeds() {
 
 // associate a constant with the array of dog breeds
 function fetchFilteredBreeds(letter) { 
-    
-    const breedStartsWith = breeds.filter(breed => breed.startswith(letter))
-    updateBreeds(breedStartsWith)
+    updateBreeds(breeds.filter(breed => breed.startswith(letter)))
 }
 
 // call on renderFilteredBreeds()
