@@ -1,6 +1,7 @@
 console.log('%c HI', 'color: firebrick')
 const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
 const breedUrl = 'https://dog.ceo/api/breeds/list/all'
+const breedDropDown = document.getElementById("breed-dropdown")
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -33,13 +34,9 @@ function fetchBreeds() {
     .then(json => {
         // console.log(json)
         const breeds = Object.keys(json.message)
-        renderBreeds(breeds)
+        updateBreeds(breeds)
+        renderFilteredBreeds()
     })
-}
-
-function renderBreeds(breeds) {
-    // console.log(breeds)
-    updateBreeds(breeds)
 }
  
 function updateBreeds(breeds) {
@@ -56,7 +53,7 @@ function updateBreeds(breeds) {
 
 function renderFilteredBreeds() {
     let dropDown = document.getElementById("breed-dropdown")
-    console.log(dropDown)
+    console.log(document)
     dropDown.addEventListener("change", function(event) {
         fetchFilteredBreeds(event.target.value)
     })
@@ -64,13 +61,9 @@ function renderFilteredBreeds() {
 
 // associate a constant with the array of dog breeds
 function fetchFilteredBreeds(letter) { 
-    return fetch('https://dog.ceo/api/breeds/list/all')
-    .then(resp => resp.json())
-    .then(json => {
-        const breeds = Object.keys(json.message)
+    
     const breedStartsWith = breeds.filter(breed => breed.startswith(letter))
-    renderBreeds(breedStartsWith)
-})
+    updateBreeds(breedStartsWith)
 }
 
 // call on renderFilteredBreeds()
