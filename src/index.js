@@ -38,23 +38,8 @@ function fetchBreeds() {
 }
 
 function renderBreeds(breeds) {
-    const ul = document.getElementById("dog-breeds")
-    breeds.forEach(breed => {
-    // console.log(breed)
-    const li = document.createElement('li')
-    li.innerText = breed
-    ul.appendChild(li)
-    li.addEventListener("click", function(event) {
-        event.target.style.color = "blue"
-    })
-})
-}
-
-function renderFilteredBreeds() {
-    const dropDown = document.querySelector("#breed-dropdown")
-    dropDown.addEventListener("change", function(e) {
-        filterBreeds(e.target.value)
-    })
+    // console.log(breeds)
+    updateBreeds(breeds)
 }
  
 function updateBreeds(breeds) {
@@ -65,11 +50,29 @@ function updateBreeds(breeds) {
         ul.appendChild(li)
         li.addEventListener("click", function(event) {
             event.target.style.color = "blue"
+        })
     })
 }
 
-function filterBreeds(letter) { 
-    arrayOfBreeds = ??
-    const breedStartWith = arrayOfBreeds.filter(breed => breed.startswith(letter))
-    updateBreeds(breedStartWith)
+function renderFilteredBreeds() {
+    let dropDown = document.getElementById("breed-dropdown")
+    console.log(dropDown)
+    dropDown.addEventListener("change", function(event) {
+        filterBreeds(event.target.value)
+    })
 }
+
+// associate a constant with the array of dog breeds
+function filterBreeds(letter) { 
+    return fetch('https://dog.ceo/api/breeds/list/all')
+    .then(resp => resp.json())
+    .then(json => {
+        const breeds = Object.keys(json.message)
+    const breedStartsWith = breeds.filter(breed => breed.startswith(letter))
+    updateBreeds(breedStartsWith)
+})
+}
+
+// renderFilteredBreeds()
+
+// call on renderFilteredBreeds()
