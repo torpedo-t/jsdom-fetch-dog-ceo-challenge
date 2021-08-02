@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", function() {
     fetchBreeds()
 })
 
+document.addEventListener("change", function() {
+
+})
+
 function fetchImages() {
     return fetch("https://dog.ceo/api/breeds/image/random/4")
     .then(resp => resp.json())
@@ -46,12 +50,6 @@ function renderBreeds(breeds) {
     })
 })
 }
-// on page load
-// fetch all the dog breeds using the url below
-// add the breeds to the page in an <ul> 
-
-
-// once all of the breeds are rendered in the <ul>
-//  add javascript so that the font color of a particular <li> changes on click.
 
 // add javascript so that the user can filter breeds that start with a particular letter using a drop down
+// id="breed-dropdown"
