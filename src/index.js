@@ -1,16 +1,15 @@
-// console.log('%c HI', 'color: firebrick')
+console.log('%c HI', 'color: firebrick')
+const imgUrl = "https://dog.ceo/api/breeds/image/random/4"
+const breedUrl = 'https://dog.ceo/api/breeds/list/all'
+
 
 document.addEventListener("DOMContentLoaded", function() {
     fetchImages()
     fetchBreeds()
 })
 
-document.addEventListener("change", function() {
-
-})
-
 function fetchImages() {
-    return fetch("https://dog.ceo/api/breeds/image/random/4")
+    return fetch(imgUrl)
     .then(resp => resp.json())
     .then(json => {
         // console.log(json)
@@ -29,10 +28,10 @@ function renderImages(images) {
 })}
 
 function fetchBreeds() {
-    return fetch("https://dog.ceo/api/breeds/list/all")
+    return fetch(breedUrl)
     .then(resp => resp.json())
     .then(json => {
-        console.log(json)
+        // console.log(json)
         const breeds = Object.keys(json.message)
         renderBreeds(breeds)
     })
@@ -51,5 +50,26 @@ function renderBreeds(breeds) {
 })
 }
 
-// add javascript so that the user can filter breeds that start with a particular letter using a drop down
-// id="breed-dropdown"
+function renderFilteredBreeds() {
+    const dropDown = document.querySelector("#breed-dropdown")
+    dropDown.addEventListener("change", function(e) {
+        filterBreeds(e.target.value)
+    })
+}
+ 
+function updateBreeds(breeds) {
+    const ul = document.getElementById("dog-breeds")
+    breeds.forEach(breed => {
+        const li = document.createElement('li')
+        li.innerText = breed
+        ul.appendChild(li)
+        li.addEventListener("click", function(event) {
+            event.target.style.color = "blue"
+    })
+}
+
+function filterBreeds(letter) { 
+    arrayOfBreeds = ??
+    const breedStartWith = arrayOfBreeds.filter(breed => breed.startswith(letter))
+    updateBreeds(breedStartWith)
+}
