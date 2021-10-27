@@ -48,6 +48,6 @@ function addBreeds(breeds) {
 // associate variable with DOM element with id breed-dropdown
 // let dropDown = document.findElementById('breed-dropdown');
 // add change event listener to the variable 
-// dropDown.addEventListener('click', funciton(event) {
+// dropDown.addEventListener('change', function(event) {
 // addBreeds(breeds.startswith.event.value)
 // })
