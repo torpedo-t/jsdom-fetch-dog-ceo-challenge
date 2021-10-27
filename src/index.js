@@ -34,7 +34,6 @@ function loadBreeds() {
 
 function addBreeds(breeds) {
   const ul = document.getElementById("dog-breeds");
-  let dropDown = document.getElementById('breed-dropdown');
   breeds.forEach(breed => {
     const li = document.createElement("li");
     li.innerText = breed;
@@ -45,9 +44,21 @@ function addBreeds(breeds) {
   });
 }
 
+function addFilteredBreeds(letter) {
+    addBreeds(breeds.filter(breed => breed.startswith(letter)));
+}
+
+function addBreedsEventListener() {
+    let dropDown = document.getElementById('breed-dropdown');
+    dropDown.addEventListener("change", function(event) {
+        let filteredBreeds = addFilteredBreeds(event.value)
+    })
+    return filteredBreeds;
+}
+
 // associate variable with DOM element with id breed-dropdown
 // let dropDown = document.findElementById('breed-dropdown');
 // add change event listener to the variable 
 // dropDown.addEventListener('change', function(event) {
-// addBreeds(breeds.startswith.event.value)
+// addFilteredBreeds(event.target.value)
 // })
