@@ -28,7 +28,7 @@ function loadBreeds() {
     .then(results => {
       const breeds = Object.keys(results.message);
       addBreeds(breeds);
-
+      addBreedsEventListener();
     });
 }
 
@@ -41,19 +41,23 @@ function addBreeds(breeds) {
     li.addEventListener("click", function(event) {
       event.target.style.color = "blue";
     });
+    if (ul.parentNode) {
+        ul.parentNode.removeChild(ul);
+        console.log(ul)
+    }
   });
 }
 
 function addFilteredBreeds(letter) {
+    console.log(letter)
     addBreeds(breeds.filter(breed => breed.startswith(letter)));
 }
 
 function addBreedsEventListener() {
     let dropDown = document.getElementById('breed-dropdown');
     dropDown.addEventListener("change", function(event) {
-        let filteredBreeds = addFilteredBreeds(event.value)
+        addFilteredBreeds(event.value)
     })
-    return filteredBreeds;
 }
 
 // associate variable with DOM element with id breed-dropdown
