@@ -1,4 +1,5 @@
 console.log('%c HI', 'color: firebrick')
+let breeds = []
 
 document.addEventListener("DOMContentLoaded", function() {
   loadImages();
@@ -26,38 +27,56 @@ function loadBreeds() {
   return fetch('https://dog.ceo/api/breeds/list/all')
     .then(resp => resp.json())
     .then(results => {
-      const breeds = Object.keys(results.message);
-      addBreeds(breeds);
+      breeds = Object.keys(results.message);
+      console.log(breeds)
+      populatingListItems(breeds);
+    //   addBreeds(breeds);
       addBreedsEventListener();
     });
 }
 
-function addBreeds(breeds) {
-  const ul = document.getElementById("dog-breeds");
-  breeds.forEach(breed => {
+// function addBreeds(breeds) {
+//   const ul = document.getElementById("dog-breeds");
+
+// }
+
+function populatingListItems(breeds) {
+    console.log('Im here')
+    const ul = document.getElementById("dog-breeds");
+    // delete html elements children
+    deleteBreeds(ul); 
+    breeds.forEach(breed => {
     const li = document.createElement("li");
     li.innerText = breed;
     ul.appendChild(li);
     li.addEventListener("click", function(event) {
       event.target.style.color = "blue";
     });
-    if (ul.parentNode) {
-        ul.parentNode.removeChild(ul);
-        console.log(ul)
-    }
   });
 }
 
+// 
 function addFilteredBreeds(letter) {
-    console.log(letter)
-    addBreeds(breeds.filter(breed => breed.startswith(letter)));
+    populatingListItems(breeds.filter(breed => breed.startsWith(letter)))
+    // .startsWith('Sat'));
 }
 
 function addBreedsEventListener() {
     let dropDown = document.getElementById('breed-dropdown');
     dropDown.addEventListener("change", function(event) {
-        addFilteredBreeds(event.value)
+        console.log(event.target.value)
+        addFilteredBreeds(event.target.value)
     })
+}
+
+function deleteBreeds(htmlElement) {
+    let child = htmlElement.lastElementChild;
+    console.log(child)
+    
+    while (htmlElement.parentNode) {
+        htmlElement.parentNode.removeChild(htmlElement);
+        console.log(htmlElement);
+    }
 }
 
 // associate variable with DOM element with id breed-dropdown
